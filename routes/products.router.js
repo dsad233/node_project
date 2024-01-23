@@ -9,7 +9,7 @@ import phone from '../schemas/products.router.js';
 
 
 router.post('/products', async (req, res) => {
-    const {title, content, author, password } = req.body;
+    const { _id, title, author, status, createdAt } = req.body;
 
     const phonedata = await phone.find({ title: title }).exec();
 
@@ -19,10 +19,11 @@ router.post('/products', async (req, res) => {
     }
 
     const createdphone = await phone.create({
-        title,
-        content,
-        author,
-        password
+        _id: _id,
+        title: title,
+        author: author,
+        status: status,
+        createdAt: createdAt
     });
 
     return res.status(201).json({ phone: createdphone });
